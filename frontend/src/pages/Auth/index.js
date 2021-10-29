@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import axios from '../../services/api';
 import { useAuth } from '../../contexts/user';
 
-import logo from '../../assets/logo.svg';
+import logo from '../../assets/logoSEEKR.svg';
 import { Container, Content, Button, Error } from './styles';
 
 export default function Auth() {
@@ -31,6 +31,7 @@ export default function Auth() {
         500: 'Sorry, an internal error has occurred.',
       };
 
+      
       setError(statusMessageError[error.response.status]);
     }
   }
@@ -43,14 +44,19 @@ export default function Auth() {
     <Container >
       
       <Content>
-        <img src={logo} alt="Tindev" />
+        <img src={logo} alt="SEEKR" />
         <input
           placeholder="your github username"
           name="username"
           onChange={handleInputChange}
           value={input}
         />
-        <Button onClick={handleSubmitForm}>Enter</Button>
+        <Button github onClick={handleSubmitForm}>Login with Github</Button>
+
+        <Button linkedin onClick={handleSubmitForm}>Login with Linkedin</Button>
+
+        <Button onClick={handleSubmitForm}>Login</Button>
+
       </Content>
       <Error>{error}</Error>
     </Container>
