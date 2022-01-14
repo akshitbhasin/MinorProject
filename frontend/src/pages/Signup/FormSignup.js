@@ -2,9 +2,36 @@ import React from 'react'
 import useForm from './useForm';
 import validate from './validateInfo';
 import './Form.css';
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
+
+const animatedComponents = makeAnimated();
+const options = [
+    { value: 'C++', label: 'C++' },
+    { value: 'C', label: 'C' },
+    { value: 'Java', label: 'Java' },
+    { value: 'Python', label: 'Python' },
+    { value: 'JavaScript', label: 'JavaScript' },
+    { value: 'React', label: 'React' },
+    { value: 'Angular', label: 'Angular' },
+    { value: 'Express', label: 'Express' },
+    { value: 'Vue', label: 'Vue' },
+    { value: 'SQL', label: 'SQL' },
+    { value: 'MongoDB', label: 'MongoDB' },
+    { value: 'NodeJS', label: 'NodeJS' },
+    { value: 'Express', label: 'Express' },
+    { value: 'Django', label: 'Django' },
+    { value: 'Machine Learning', label: 'Machine Learning' },
+    { value: 'TenserFlow', label: 'TensorFlow' },
+    { value: 'OpenCV', label: 'OpenCV' },
+    { value: 'AWS', label: 'AWS' },
+    { value: 'Azure', label: 'Azure' },
+    { value: 'Flask', label: 'Flask' },
+    { value: 'Spring', label: 'Spring' },
+]
 
 const FormSignup = ({submitForm}) => {
-    const {handleChange, values, handleSubmit, errors} = useForm(submitForm, validate);
+    const {handleIsRefererChange, handleInterestChange, handleChange, values, handleSubmit, errors} = useForm(submitForm, validate);
 
     return (
         <div className="form-content-right" >
@@ -42,20 +69,24 @@ const FormSignup = ({submitForm}) => {
                     <input id="email" type="email" className="form-input" name="email" placeholder="Enter Your Email" value={values.email} onChange={handleChange}></input>
                     {errors.email && <p>{errors.email}</p>}
                 </div>
+                <div className="form-inputs">
+                    <label htmlFor="Interests" className="form-label" name = "interests">Pick Your Interests: </label>
+                    <Select options={options} isMulti components={animatedComponents} name="Interests" onChange={handleInterestChange}/>
+                </div>
 
                 <div className="form-inputs">
-                    <label htmlFor="isreferee" className="form-label">I'm Here To: </label>
-                    <div>
-                        <label className="radio-labels">Seek Referals:</label>
-                        <input id="isreferee" type="radio" className="form-input" name="isreferee" value="givereferals" value={values.isreferee} onChange={handleChange}></input>
-                    </div>
-                    <div>
-                        <label className="radio-labels">Give Referals:</label>
-                        <input id="isreferee" type="radio" className="form-input" name="isreferee" value="givereferals"value={values.isreferrer} onChange={handleChange} ></input>
-                    </div>
-                </div>
+                    <label htmlFor="isReferer" className="form-label">I'm Here For: </label>
+                    <Select options={[
+                         { value: '0', label: 'Seek Referals' },
+                         { value: '1', label: 'Give Referals' },
+                         
+
+                    ]}  name="isReferer" onChange={handleIsRefererChange}/>
+                </div>            
+
                 <button className="form-input-btn" type="submit">Sign Up</button>
                 <span className="form-input-login">Already Have An Account? Login <a href="/auth">Here</a></span>
+                
             </form>
         </div>
     )

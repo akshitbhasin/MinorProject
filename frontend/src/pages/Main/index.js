@@ -3,15 +3,21 @@ import TinderCard from 'react-tinder-card';
 import { useAuth } from '../../contexts/user';
 import axios from '../../services/api';
 import io from 'socket.io-client';
+import altUserImage from '../../assets/altuser.jpg';
 
 import HeaderWeb from '../../components/HeaderWeb';
 import HeaderMobile from '../../components/HeaderMobile';
 import CardUser from '../../components/CardUser';
 import MatchModal from '../../components/MatchModal';
 
+
+
+
 import { Container, CardContainer, EndUsers } from './styles';
 
 export default function Main() {
+  const ip =  'localhost';
+  const path = 'http://' + ip + ':5000';
   const { user } = useAuth();
   const [users, setUsers] = useState([]);
   const [matchUser, setMatchUser] = useState(null);
@@ -29,9 +35,10 @@ export default function Main() {
 
   //connects to the server via sockets
   useEffect(() => {
-    const socket = io('http://localhost:8080', {
+    const socket = io(path, {
       query: { user: user.id },
     });
+
 
     socket.on('match', (user) => {
       setMatchUser(user);
@@ -84,8 +91,10 @@ export default function Main() {
               </TinderCard>
             ))}
             {users.length === 0 && (
-              <EndUsers>
-                <img src={user?.avatar_url} alt="user" />
+              <EndUsers>{
+                user.avatar_url? (<img src={user.avatar_url} alt=""/>) : (<img src={altUserImage} alt=""/>)
+                }
+                
                 <p>There are no more users to show :(</p>
               </EndUsers>
             )}

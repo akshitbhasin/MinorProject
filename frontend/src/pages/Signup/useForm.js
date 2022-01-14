@@ -1,4 +1,7 @@
 import { useState, useEffect } from "react";
+import axios from '../../services/api';
+import { useHistory } from 'react-router-dom';
+import { useAuth } from '../../contexts/user';
 
 const useForm = (callback, validate) => {
     const [values, setValues] = useState({
@@ -8,10 +11,14 @@ const useForm = (callback, validate) => {
         repasswrd:'',
         email:'',
         isreferee: true,
-        isreferrer: false
-    })
+        isreferrer: false,
+    });
+    const { auth } = useAuth();
+    const history = useHistory();
     const [errors, setErrors] = useState({});
-    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [interests, setInterests] = useState([]);
+    const [isReferer, setIsReferer] = useState(0);
 
     const handleChange=(e)=>{
         const {name, value} = e.target;
@@ -19,11 +26,40 @@ const useForm = (callback, validate) => {
             ...values, [name]: value
         });
     };
+    const handleInterestChange=(e)=>{
+       let array = []
+       for(let key in e){
+           array.push(e[key].value);
+       }
+       setInterests(array)
+    }
+    const handleIsRefererChange = (e) =>{
+        setIsReferer(e.value);
+    }
 
-    const handleSubmit = e =>{
+    async function handleSubmit (e){
         e.preventDefault();
         setErrors(validate(values));
         setIsSubmitting(true);
+        try {
+            const response = await axios.post('/signup', {
+                
+                    name: values.name,
+                    username: values.username,
+                    password: values.password,
+                    email: values.email,
+                    interests: interests,
+                    isreferer: isReferer
+
+                    
+                
+            })
+            auth(response.data);
+            history.push('/main');
+        }
+        catch(error){
+            console.log(error);
+        }
     };
 
     useEffect(()=>{
@@ -31,6 +67,6 @@ const useForm = (callback, validate) => {
             callback();
         }
     }, [errors])
-    return {handleChange, values, handleSubmit, errors };
+    return {handleIsRefererChange, handleInterestChange, handleChange, values, handleSubmit, errors };
 };
 export default useForm;

@@ -29,9 +29,9 @@ export default function Auth() {
       const statusMessageError = {
         404: 'This user does not exist',
         500: 'Sorry, an internal error has occurred.',
-      };
 
-      
+      };
+      console.log(error.response);
       setError(statusMessageError[error.response.status]);
     }
   }

@@ -10,9 +10,12 @@ export default function HeaderWeb({ notifications, user }) {
   return (
     <Container>
       <HeaderMenu>
-        <span>
-          <img src={user.avatar_url} alt={user.username} />
-          <p>{user.name}</p>
+        <span>{user.avatar_url?(<>
+            <img src={user.avatar_url} alt={user.username} />
+            <p>{user.name}</p>
+            </>
+        ):( <p>{user.name}</p>) 
+          }
         </span>
         <Switch />
       </HeaderMenu>

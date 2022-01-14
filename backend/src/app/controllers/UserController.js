@@ -32,7 +32,7 @@ class UserController {
             { id: { [Op.notIn]: totalUsers } },
           ],
         },
-        attributes: ['id', 'name', 'username', 'bio', 'html_url', 'avatar_url']
+        attributes: ['id', 'name', 'username', 'bio', 'html_url', 'avatar_url', 'interests']
       });
 
       return response.json(users);
@@ -52,6 +52,7 @@ class UserController {
       }
 
       const user = await User.findOne({ where: { username } });
+      console.log();
 
       if (!user) {
         const url = `https://api.github.com/users/${username}`;
@@ -79,6 +80,24 @@ class UserController {
 
       return response.json(user);
     } catch (error) {
+      return response
+        .status(500)
+        .json({ error: 'Unexpected error signing in.' });
+    }
+  }
+  async Signup(request, response){
+    try{
+        const newUserData = {};
+        Object.assign(newUserData, request.body);
+        newUserData.interests = request.body.interests.toString();
+        
+        const newUserRegister = await User.create(newUserData);
+        console.log(newUserData);
+        console.log(newUserRegister);
+        return response.status(201).json(newUserRegister);
+    }
+    catch(e){
+      console.log(e);
       return response
         .status(500)
         .json({ error: 'Unexpected error signing in.' });

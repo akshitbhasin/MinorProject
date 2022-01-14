@@ -3,28 +3,18 @@ import FormSignup from './FormSignup';
 import FormSuccess from './FormSuccess';
 import logo from '../../assets/logoSEEKR.svg';
 import spaceship from './spaceship.svg';
-import axios from '../../services/api';
+import './Form.css';
 const Form = () => {
     const [isSubmitted, setIsSubmitted] = useState(false)
     async function submitForm(values){
-        try {
-            const response = await axios.post('/signup', {
-              name: values.name,
-              username: values.username,
-              password: values.password,
-              email: values.email
-            });
-        }
-        catch(error){
-            console.log(error);
-        }
+        
         setIsSubmitted(true);
     }
    
     return (
         
-        <>
-        <div className="bg" ></div>
+        
+        <div className="bg" >
         <div className='form-container'>
           <div className='form-content-left'>
             <img className='form-img' src={logo} alt='Oops!' />
@@ -34,10 +24,12 @@ const Form = () => {
           {!isSubmitted ? (
             <FormSignup submitForm={submitForm} />
           ) : (
-            <FormSuccess />
+            <FormSignup submitForm={submitForm} />
           )}
         </div>
-      </>
+        </div>
+        
+      
     )
 }
 

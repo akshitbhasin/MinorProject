@@ -62,9 +62,9 @@ export const Profile = styled.img`
 
 export const Link = styled.a`
   text-decoration: none;
-  background: linear-gradient(0.25turn, #ff0569, #ff3d44, #ff613b);
+  background: linear-gradient(0.25turn, #7f96d8, #05b4ff, #0558ff);
 
-  max-width: 302px;
+  max-width: 150px;
   width: 100%;
   padding: 22px 0;
   border-radius: 8px;

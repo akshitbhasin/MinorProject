@@ -1,11 +1,14 @@
-import React from 'react'
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { useAuth } from '../../contexts/user';
 
-const FormSuccess = () => {
+
+const FormSuccess = (user) => {
+    const { auth } = useAuth();
+  const history = useHistory();
+  auth(user.data)
     return (
-        <div className="form-content-right">
-            <div className="form-success">REQUEST RECIEVED!</div>
-            
-        </div>
+        <></>
     )
 }
 
