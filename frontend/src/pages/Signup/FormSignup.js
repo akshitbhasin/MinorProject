@@ -31,7 +31,7 @@ const options = [
 ]
 
 const FormSignup = ({submitForm}) => {
-    const {handleIsRefererChange, handleInterestChange, handleChange, values, handleSubmit, errors} = useForm(submitForm, validate);
+    const {handleLocationsChange, handleIsRefererChange, handleInterestChange, handleChange, values, handleSubmit, errors} = useForm(submitForm, validate);
 
     return (
         <div className="form-content-right" >
@@ -72,6 +72,16 @@ const FormSignup = ({submitForm}) => {
                 <div className="form-inputs">
                     <label htmlFor="Interests" className="form-label" name = "interests">Pick Your Interests: </label>
                     <Select options={options} isMulti components={animatedComponents} name="Interests" onChange={handleInterestChange}/>
+                </div>
+                <div className="form-inputs">
+                    <label htmlFor="Locations" className="form-label" name = "locations">Pick Your Locations: </label>
+                    <Select options={[
+                        {value: "Gurugram", label: "Gurugram"},
+                        {value: "Noida", label: "Noida"},
+                        {value: "Bangalore", label: "Bangalore"},
+                        {value: "Hyderabad", label: "Hyderabad"},
+                        {value: "Pune", label: "Pune"},
+                        {value: "Mumbai", label: "Mumbai"},]} isMulti components={animatedComponents} name="Locations" onChange={handleLocationsChange}/>
                 </div>
 
                 <div className="form-inputs">

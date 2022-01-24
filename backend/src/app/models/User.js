@@ -13,8 +13,8 @@ class User extends Model {
         avatar_url: Sequelize.STRING,
         html_url: Sequelize.STRING,
         interests: Sequelize.STRING,
-        isReferer: Sequelize.INTEGER
-
+        isReferer: Sequelize.INTEGER,
+        locations: Sequelize.STRING
       },
       {
         sequelize,

@@ -19,6 +19,7 @@ const useForm = (callback, validate) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [interests, setInterests] = useState([]);
     const [isReferer, setIsReferer] = useState(0);
+    const [locations, setLocations] = useState([]);
 
     const handleChange=(e)=>{
         const {name, value} = e.target;
@@ -31,10 +32,17 @@ const useForm = (callback, validate) => {
        for(let key in e){
            array.push(e[key].value);
        }
-       setInterests(array)
+       setInterests(array);
     }
     const handleIsRefererChange = (e) =>{
         setIsReferer(e.value);
+    }
+    const handleLocationsChange = (e) =>{
+        let array = []
+        for(let key in e){
+            array.push(e[key].value);
+        }
+        setLocations(array);
     }
 
     async function handleSubmit (e){
@@ -49,6 +57,7 @@ const useForm = (callback, validate) => {
                     password: values.password,
                     email: values.email,
                     interests: interests,
+                    locations: locations,
                     isreferer: isReferer
 
                     
@@ -67,6 +76,6 @@ const useForm = (callback, validate) => {
             callback();
         }
     }, [errors])
-    return {handleIsRefererChange, handleInterestChange, handleChange, values, handleSubmit, errors };
+    return {handleLocationsChange,handleIsRefererChange, handleInterestChange, handleChange, values, handleSubmit, errors };
 };
 export default useForm;

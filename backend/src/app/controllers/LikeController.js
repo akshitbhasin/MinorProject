@@ -50,6 +50,7 @@ class LikeController {
         .json({ error: 'Unexpected error while liking user' });
     }
   }
+
 }
 
 export default new LikeController();

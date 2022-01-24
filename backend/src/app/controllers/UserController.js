@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Op, Sequelize } from 'sequelize';
 import Like from '../models/Like';
 import Dislike from '../models/Dislike';
+import { match } from 'sucrase/dist/parser/tokenizer';
+const { Op } = require("sequelize");
 
 class UserController {
   async index(request, response) {
@@ -32,7 +34,7 @@ class UserController {
             { id: { [Op.notIn]: totalUsers } },
           ],
         },
-        attributes: ['id', 'name', 'username', 'bio', 'html_url', 'avatar_url', 'interests']
+        attributes: ['id', 'name', 'username', 'bio', 'html_url', 'avatar_url', 'interests', 'locations']
       });
 
       return response.json(users);
@@ -90,6 +92,7 @@ class UserController {
         const newUserData = {};
         Object.assign(newUserData, request.body);
         newUserData.interests = request.body.interests.toString();
+        newUserData.locations = request.body.locations.toString();
         
         const newUserRegister = await User.create(newUserData);
         console.log(newUserData);
@@ -101,6 +104,32 @@ class UserController {
       return response
         .status(500)
         .json({ error: 'Unexpected error signing in.' });
+    }
+  }
+  async getLikedUsers(request, response){
+    try {
+      console.log(request.body);
+      let userId = request.body.id;
+      let matchedUsersId = await Like.findAll({ 
+        where: {
+         [Op.and]: [{user_receive : userId}, {is_match: 1}]
+        },
+        attributes: ['user_emmiter']
+      })
+      let matchedUsers = [];
+      matchedUsersId.forEach((Element)=>{
+        matchedUsers.push(Element.dataValues.user_emmiter);
+      }) 
+      const result = await User.findAll({
+        where: {
+          id: matchedUsers
+        },
+      })
+      return response.json(JSON.stringify(result));
+    
+    }catch(e){
+      console.log(e);
+      return response.json({"message": "No data Found"})
     }
   }
 }

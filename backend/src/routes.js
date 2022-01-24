@@ -13,5 +13,6 @@ routes.get('/users/:id', UserController.index);
 routes.post('/signup', UserController.Signup);
 routes.post('/likes/:emmiter/:receive', LikeController.store);
 routes.post('/dislikes/:emmiter/:receive', DislikeController.store);
+routes.post('/getLikedUsers', UserController.getLikedUsers);
 
 export default (app) => app.use('/api', routes);

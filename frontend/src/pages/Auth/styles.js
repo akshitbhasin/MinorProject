@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import img from './authbg.jpg';
 
+
 export const Container = styled.div`
   height: 100%;
   display: flex;
@@ -57,10 +58,13 @@ export const Button = styled.button`
 
   }
 `;
-// export const image = styled.img`
-// width: 5px;
-// height: 5px;
-// `;
+export const StyledLink = styled.link`
+    text-decoration: none;
+
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+    }
+`;
 export const Error = styled.p`
   color: #ff0569;
   font-weight: bold;

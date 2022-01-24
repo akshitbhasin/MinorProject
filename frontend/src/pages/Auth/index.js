@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from '../../services/api';
 import { useAuth } from '../../contexts/user';
+import { Link } from 'react-router-dom';
 
 import logo from '../../assets/logoSEEKR.svg';
-import { Container, Content, Button, Error } from './styles';
+import { Container, Content, Button, Error, StyledLink } from './styles';
 
 export default function Auth() {
   const { auth } = useAuth();
@@ -56,7 +57,8 @@ export default function Auth() {
         <Button linkedin onClick={handleSubmitForm}>Login with Linkedin</Button>
 
         <Button onClick={handleSubmitForm}>Login</Button>
-
+        <br/>
+        <Link to="/signup" ><h2>New Here? Signup</h2></Link>
       </Content>
       <Error>{error}</Error>
     </Container>

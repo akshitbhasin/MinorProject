@@ -19,7 +19,7 @@ const  PageNotFound = () => {
             </g>
           </g>
         </svg>
-        <h1>This Is Not The HomePage You Are Looking For  :(</h1>
+        <h1>This Is Not The Page You Are Looking For  :(</h1>
         <br/>
          <a href="auth" > <h3>Go to HomePage </h3></a>
       </div>

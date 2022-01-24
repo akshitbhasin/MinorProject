@@ -6,6 +6,7 @@ import altUserImage from '../../assets/altuser.jpg';
 export default function Notifications({ user }) {
   let link = user.html_url? user.html_url : user.email;
   let imgUrl = user.avatar_url? user.avatar_url : altUserImage;
+  console.log(user);
 
   return (
     <Container>

@@ -17,7 +17,11 @@ export const Container = styled.div`
   width: 380px;
   height: 100%;
   border-radius: 8px;
-
+  &:hover {
+    box-shadow: 0 0 60px 0 ${(props)=> props.color};
+    transition: 0.5s;
+    }
+    
   footer h2 {
     color: ${(props) => props.theme.thirdTextColor};
     margin-bottom: 12px;

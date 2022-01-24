@@ -38,6 +38,11 @@ const users = connection.define('users', {
         allowNull: true,
         defaultValue: "None" 
       },
+      locations: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: "None" 
+      },
 
       created_at: {
         type: DataTypes.DATE,
