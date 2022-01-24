@@ -11,12 +11,17 @@ const users = connection.define('users', {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
       },
       username: {
         type: DataTypes.STRING,
         allowNull: true,
         unique: true,
+      },
+      password:{
+        type:DataTypes.STRING
+      },
+      email:{
+        type: DataTypes.STRING,
       },
       bio: {
         type: DataTypes.TEXT,
@@ -26,7 +31,17 @@ const users = connection.define('users', {
       },
       html_url: {
         type: DataTypes.STRING,
-        allowNull: false,
+        
+      },
+      interests: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: "None" 
+      },
+      locations: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: "None" 
       },
 
       created_at: {
@@ -39,12 +54,14 @@ const users = connection.define('users', {
         allowNull: false,
         defaultValue: 0
       },
-      isReferee: {
-        type: DataTypes.BOOLEAN,
+      isReferer: {
+        type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0
 
-      }
+      },
+      
+
     });
     // const users = userDB.userDB(connection);
     console.log(users === connection.models.users);

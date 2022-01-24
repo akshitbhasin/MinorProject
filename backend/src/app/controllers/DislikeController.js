@@ -7,7 +7,7 @@ class DislikeController {
       const { emmiter, receive } = request.params;
 
       if (!(await User.findByPk(emmiter)) || !(await User.findByPk(receive))) {
-        return response.status(404).json({ error: 'User does not exists' });
+        return response.status(404).json({ error: 'User does not exist' });
       }
 
       await Dislike.create({

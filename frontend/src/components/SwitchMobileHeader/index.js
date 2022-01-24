@@ -1,7 +1,7 @@
 import React from 'react';
 import Switch from '../Switch';
 
-import logo from '../../assets/logo-mobile.svg';
+import logo from '../../assets/logoSEEKR-mobile.svg';
 import { MdClose } from 'react-icons/md';
 import { Container, Content, Option } from './styles';
 

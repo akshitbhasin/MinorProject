@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import img from './authbg.jpg';
 
+
 export const Container = styled.div`
   height: 100%;
   display: flex;
@@ -41,6 +42,7 @@ export const Content = styled.div`
 `;
 
 export const Button = styled.button`
+  margin-top: 20px;
   width: 100%;
   height: 44px;
   border-radius: 5px;
@@ -48,10 +50,26 @@ export const Button = styled.button`
   font-weight: bold;
   color: #fff;
   cursor: pointer;
-  background: linear-gradient(0.25turn, #ff0569, #ff3d44, #ff613b);
-`;
+  background: ${props => props.github ? "#000000" : props.linkedin ? "#0e76a8 " :  
+  "linear-gradient(to right, #142144, #8ea2dd )"}; 
+  
+  img {
+   order: 1;
 
+  }
+`;
+export const StyledLink = styled.link`
+    text-decoration: none;
+
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+    }
+`;
 export const Error = styled.p`
   color: #ff0569;
-  margin-top: 13px;
+  font-weight: bold;
+  font-size: 20px;
+  background: white;
+  border-radius : 5px;
+  margin-top: 18px;
 `;

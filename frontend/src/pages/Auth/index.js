@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from '../../services/api';
 import { useAuth } from '../../contexts/user';
+import { Link } from 'react-router-dom';
 
-import logo from '../../assets/logo.svg';
-import { Container, Content, Button, Error } from './styles';
+import logo from '../../assets/logoSEEKR.svg';
+import { Container, Content, Button, Error, StyledLink } from './styles';
 
 export default function Auth() {
   const { auth } = useAuth();
@@ -29,8 +30,9 @@ export default function Auth() {
       const statusMessageError = {
         404: 'This user does not exist',
         500: 'Sorry, an internal error has occurred.',
-      };
 
+      };
+      console.log(error.response);
       setError(statusMessageError[error.response.status]);
     }
   }
@@ -43,14 +45,20 @@ export default function Auth() {
     <Container >
       
       <Content>
-        <img src={logo} alt="Tindev" />
+        <img src={logo} alt="SEEKR" />
         <input
           placeholder="your github username"
           name="username"
           onChange={handleInputChange}
           value={input}
         />
-        <Button onClick={handleSubmitForm}>Enter</Button>
+        <Button github onClick={handleSubmitForm}>Login with Github</Button>
+
+        <Button linkedin onClick={handleSubmitForm}>Login with Linkedin</Button>
+
+        <Button onClick={handleSubmitForm}>Login</Button>
+        <br/>
+        <Link to="/signup" ><h2>New Here? Signup</h2></Link>
       </Content>
       <Error>{error}</Error>
     </Container>

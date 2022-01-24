@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import ModalSwitch from '../SwitchMobileHeader';
 import { useAuth } from '../../contexts/user';
 import { MdMoreHoriz } from 'react-icons/md';
-import logo from '../../assets/logo-mobile.svg';
+import logo from '../../assets/logoSEEKR-mobile.svg';
 
 import { Container, Profile, Button } from './styles';
 

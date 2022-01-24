@@ -7,9 +7,14 @@ class User extends Model {
       {
         name: Sequelize.STRING,
         username: Sequelize.STRING,
+        password:Sequelize.STRING,
+        email:Sequelize.STRING,
         bio: Sequelize.TEXT,
         avatar_url: Sequelize.STRING,
         html_url: Sequelize.STRING,
+        interests: Sequelize.STRING,
+        isReferer: Sequelize.INTEGER,
+        locations: Sequelize.STRING
       },
       {
         sequelize,

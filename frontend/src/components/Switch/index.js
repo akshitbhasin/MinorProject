@@ -11,7 +11,7 @@ export default function Switch() {
       checkedIcon={false}
       uncheckedIcon={false}
       offColor={'#ddd'}
-      onColor={'#ff8d3b'}
+      onColor={'#18191A'}
     />
   );
 }
