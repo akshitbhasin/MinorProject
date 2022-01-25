@@ -17,6 +17,7 @@ export const Container = styled.div`
   width: 380px;
   height: 100%;
   border-radius: 8px;
+  transition:  0.2s ease-in-out;
   &:hover {
     box-shadow: 0 0 60px 0 ${(props)=> props.color};
     transition: 0.5s;
