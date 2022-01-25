@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import TinderCard from 'react-tinder-card';
 import { useAuth } from '../../contexts/user';
 import axios from '../../services/api';
@@ -6,8 +6,7 @@ import io from 'socket.io-client';
 import altUserImage from '../../assets/altuser.jpg';
 import 'react-tippy/dist/tippy.css';
 import {Tooltip} from 'react-tippy';
-import SlidingPane from 'react-sliding-side-panel';
-import Fade from 'react-reveal/Fade';
+
 
 
 import HeaderWeb from '../../components/HeaderWeb';
@@ -28,8 +27,8 @@ export default function Main() {
   const [users, setUsers] = useState([]);
   const [matchUser, setMatchUser] = useState(null);
   const [notifications, setNotifications] = useState([]);
-  const [isPaneOpen, setIsPaneOpen] = useState(false);
-  const [repos, setRepos] = useState([]);
+
+  
     
  
   //fetch data on API
@@ -115,23 +114,19 @@ export default function Main() {
       return {percentage: percentage, color: "limegreen"};
     return {percentage: percentage, color: "green"};     
   }
-  async function getPinnedRepos(user){
-    const response = await fetch(`http://gh-pinned-repos-5l2i19um3.vercel.app/?username=${user.username}`);
-    const result = await response.json();
-    let arr = [];
-    for(const key in result){
-      arr.push(result[key]);
-    } 
-    setRepos(arr);
-    return repos;
-  }
+ 
 
   
   
   return (
+    <>
     <Container>
       <HeaderMobile user={user} />
       <HeaderWeb notifications={notifications} user={user} />
+
+
+      
+      
       {users && (
           <CardContainer>
             {users.map((cardUser) => (
@@ -141,15 +136,16 @@ export default function Main() {
                   key={cardUser.id}
                   onSwipe={handleSwipeAction}
                   preventSwipe={['up', 'down']}> 
-                  <Tooltip title = {interestParser(cardUser) + " and is a "+ matchingMatrix(cardUser, user).percentage + "% match \n" } position="right">
+                  <Tooltip size ="big" 
+                  title = {interestParser(cardUser) + " and is a "+ matchingMatrix(cardUser, user).percentage + "% match \n" } 
+                  position="right">
                   <CardUser user={cardUser} color = {matchingMatrix(cardUser, user).color}/>
-                  </Tooltip>
+                  </Tooltip>                 
                 </TinderCard>
               </>
-                
               ))
-              
             }
+            
             
               
             {users.length === 0 && (
@@ -166,5 +162,7 @@ export default function Main() {
         <MatchModal onClose={handleCloseMatchModal} user={matchUser} />
       )}
     </Container>
+    
+    </>
   );
 }
